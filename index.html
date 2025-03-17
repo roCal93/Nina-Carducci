@@ -3,9 +3,15 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link preload rel="stylesheet" href="./assets/bootstrap/bootstrap.css">
+	<link rel="preload" href="./assets/bootstrap/bootstrap.css" as="style"
+		onload="this.onload=null;this.rel='stylesheet'"><noscript>
+		<link rel="stylesheet" href="./assets/bootstrap/bootstrap.css">
+	</noscript>
 	<link rel="stylesheet" href="./assets/style.css">
-	<link preload rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preload" href="https://fonts.googleapis.com" as="style" onload="this.onload=null;this.rel='preconnect'">
+	<noscript>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+	</noscript>
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
 		href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap"
