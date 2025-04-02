@@ -34,8 +34,8 @@
                               </div>
                           </div>`; gallery.append(modalHTML); const modal = $(`#${lightboxId ? lightboxId : "galleryLightbox"}`); modal.on('shown', function () { $(this).find('.mg-prev').focus() }); modal.on('keydown', function (e) { const focusableElements = modal.find('img, .mg-prev, .mg-next'); const firstElement = focusableElements.first(); const lastElement = focusableElements.last(); if (e.key === "Tab") { if (e.shiftKey) { if (document.activeElement === firstElement[0]) { lastElement.focus(); e.preventDefault() } } else { if (document.activeElement === lastElement[0]) { firstElement.focus(); e.preventDefault() } } } })
     }, showItemTags(gallery, position, tags) {
-      var tagItems = '<li class="nav-item"><span tabindex="11"  class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>'; $.each(tags, function (index, value) {
-        tagItems += `<li class="nav-item active">
+      var tagItems = '<li class="nav-item" aria-label="filtres" ><span tabindex="11" class="nav-link active active-tag" data-images-toggle="all">Tous</span></li>'; $.each(tags, function (index, value) {
+        tagItems += `<li class="nav-item active" aria-label="filtre">
                 <span tabindex="12"     class="nav-link"  data-images-toggle="${value}">${value}</span></li>`
       }); var tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`; if (position === "bottom") { gallery.append(tagsRow) } else if (position === "top") { gallery.prepend(tagsRow) } else { console.error(`Unknown tags position: ${position}`) }
     }, filterByTag() {
