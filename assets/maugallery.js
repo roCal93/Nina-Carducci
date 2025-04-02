@@ -22,21 +22,21 @@
       let activeImage = null; $("img.gallery-item").each(function () { if ($(this).attr("src") === $(".lightboxImage").attr("src")) { activeImage = $(this) } }); let activeTag = $(".tags-bar span.active-tag").data("images-toggle"); let imagesCollection = []; if (activeTag === "all") { $(".item-column").each(function () { if ($(this).children("img").length) { imagesCollection.push($(this).children("img")) } }) } else { $(".item-column").each(function () { if ($(this).children("img").data("gallery-tag") === activeTag) { imagesCollection.push($(this).children("img")) } }) }
       let index = 0, next = null; $(imagesCollection).each(function (i) { if ($(activeImage).attr("src") === $(this).attr("src")) { index = i + 1 } }); next = imagesCollection[index] || imagesCollection[0]; $(".lightboxImage").attr("src", $(next).attr("src"))
     }, createLightBox(gallery, lightboxId, navigation) {
-      const modalHTML = `<div class="modal" id="${lightboxId ? lightboxId : "galleryLightbox"}" tabindex="-1" role="dialog">
+      const modalHTML = `<div class="modal" id="${lightboxId ? lightboxId : "galleryLightbox"}" tabindex="15" role="dialog" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                       <div class="modal-body">
-                                          ${navigation ? '<div class="mg-prev" tabindex="0" aria-label="Précédent" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;">&lt;</div>' : ''}
+                                          ${navigation ? '<div class="mg-prev" tabindex="15" aria-label="Précédent" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;">&lt;</div>' : ''}
                                           <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clic"/>
-                                          ${navigation ? '<div class="mg-next" tabindex="0" aria-label="Suivant" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;">&gt;</div>' : ''}
+                                          ${navigation ? '<div class="mg-next" tabindex="15" aria-label="Suivant" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;">&gt;</div>' : ''}
                                       </div>
                                   </div>
                               </div>
                           </div>`; gallery.append(modalHTML); const modal = $(`#${lightboxId ? lightboxId : "galleryLightbox"}`); modal.on('shown', function () { $(this).find('.mg-prev').focus() }); modal.on('keydown', function (e) { const focusableElements = modal.find('img, .mg-prev, .mg-next'); const firstElement = focusableElements.first(); const lastElement = focusableElements.last(); if (e.key === "Tab") { if (e.shiftKey) { if (document.activeElement === firstElement[0]) { lastElement.focus(); e.preventDefault() } } else { if (document.activeElement === lastElement[0]) { firstElement.focus(); e.preventDefault() } } } })
     }, showItemTags(gallery, position, tags) {
-      var tagItems = '<li class="nav-item"><span tabindex="0"  class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>'; $.each(tags, function (index, value) {
+      var tagItems = '<li class="nav-item"><span tabindex="11"  class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>'; $.each(tags, function (index, value) {
         tagItems += `<li class="nav-item active">
-                <span tabindex="0"     class="nav-link"  data-images-toggle="${value}">${value}</span></li>`
+                <span tabindex="12"     class="nav-link"  data-images-toggle="${value}">${value}</span></li>`
       }); var tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`; if (position === "bottom") { gallery.append(tagsRow) } else if (position === "top") { gallery.prepend(tagsRow) } else { console.error(`Unknown tags position: ${position}`) }
     }, filterByTag() {
       if ($(this).hasClass("active-tag")) { return }
